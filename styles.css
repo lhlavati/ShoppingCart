@@ -5,12 +5,6 @@ body {
     background: var(--mainWhite);
     font-family: "Lato", sans-serif;
     color: whitesmoke;
-  }
-
-.card {
-    background-color: lightslategray;
-    color: whitesmoke;
-
 }
 
 .products-center {
@@ -39,41 +33,6 @@ body {
 .sidenav {
     width: 450px;
 }
-/* --------------- Navbar ---------------- */
-.navbar {
-    position: sticky;
-    top: 0;
-    height: 60px;
-    width: 100%;
-    align-items: center;
-    background: lightslategray;
-    z-index: 1;
-  }
-  .name h4 {
-      align-items: center;
-  }
-  .navbar-center {
-    width: 100%;
-    height: 60px;
-    max-width: 1170px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1.5rem;
-  }
-  .cart-btn {
-    position: sticky;
-    cursor: pointer;
-  }
-  .cart-items {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    padding: 0 5px;
-    border-radius: 30%;
-  }
-  /* --------------- End of Navbar ---------------- */
 
 /* --------------- Products ---------------- */
 
@@ -95,7 +54,13 @@ body {
   .product{
       background-color: lightslategrey;
       border-style: solid;
+      text-align: center;
   }
+
+  #dodaj {
+    margin-bottom: 15px;
+  }
+
   .product-img {
     display: block;
     width: 100%;
