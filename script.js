@@ -1,6 +1,5 @@
-const cartTotal = document.getElementsByClassName(".cart-total");
+const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
-console.log(cartContent);
 const cartContainer = document.querySelector(".container");
 const clearCartBtn = document.querySelector(".clear-cart");
 const cartDOM = document.querySelector(".cart");
@@ -75,13 +74,12 @@ class UI {
     cart.map(item => {
       tempTotal += item.amount * item.count;
     });
-    cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+    cartTotal.innerText = parseFloat(tempTotal.toFixed(2)) + " kn";
     console.log(cartTotal);
   }
   addCartItem(item) {
     const div = document.createElement("div");
     div.classList.add("cart-item");
-    console.log(div);
     div.innerHTML = `<img src=${item.image} alt="product">
                     <div>
                         <h4>${item.name}</h4>
@@ -93,7 +91,7 @@ class UI {
                         <p class="item-amount">${item.count}</p>
                         <i class="material-icons arrow_down" data-id=${item.id}>arrow_drop_down</i>
                     </div>`;
-    cartContent.append(div);
+    cartContent.appendChild(div);
     console.log(cartContent);
   }
 }
