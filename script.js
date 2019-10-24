@@ -83,11 +83,11 @@ class UI {
                     <div>
                         <h4>${item.name}</h4>
                         <h5>${item.amount} ${item.currency}</h5>
-                        <span class="remove-item" data-id=${item.id}><i class="material-icons">remove_circle</i></span>
+                        <span class="remove-item" data-id=${item.id}>Makni iz košarice</span>
                     </div>
                     <div class="product-count">
                         <i class="material-icons arrow_up" data-id=${item.id}>arrow_drop_up</i>
-                        <p class="item-amount">${item.count}</p>
+                        <p class="item-count">${item.count}</p>
                         <i class="material-icons arrow_down" data-id=${item.id}>arrow_drop_down</i>
                     </div>`;
     cartContent.appendChild(div);
@@ -96,23 +96,50 @@ class UI {
       clearCartBtn.addEventListener("click", () => {
           this.clearCart();
       });
+      cartContent.addEventListener("click", event => {
+          if(event.target.classList.contains("remove-item")){
+              let removeItem = event.target;
+              let id = removeItem.dataset.id;
+              cartContent.removeChild(removeItem.parentElement.parentElement);
+              this.removeItem(id);
+          } else if (event.target.classList.contains("arrow_up")){
+              let addCount = event.target;
+              let id = addCount.dataset.id;
+              let tempItem = cart.find(item => item.id == id);
+              tempItem.count = tempItem.count + 1;
+              Storage.saveCart(cart);
+              this.setCartValues(cart);
+              addCount.nextElementSibling.innerText = tempItem.count;
+          } else if (event.target.classList.contains("arrow_down")){
+              let lowerCount = event.target;
+              let id = lowerCount.dataset.id;
+              let tempItem = cart.find(item => item.id == id);
+              tempItem.count = tempItem.count - 1;
+              if(tempItem.count > 0){
+                Storage.saveCart(cart); 
+                this.setCartValues(cart);
+                lowerCount.previousElementSibling.innerText = tempItem.count;
+              } else {
+                cartContent.removeChild(lowerCount.parentElement.parentElement);
+                this.removeItem(id);
+              }
+          }
+      })
   }
   clearCart(){
       let cartItems = cart.map(item => item.id);
       cartItems.forEach(id => this.removeItem(id));
-      console.log(cartContent.children);
-      
       while(cartContent.children.length > 0){
           cartContent.removeChild(cartContent.children[0]);
       }
   }
   removeItem(id){
-    cart = cart.filter(item => item.id !== id);
+    cart = cart.filter(item => item.id != id);
     this.setCartValues(cart);
     Storage.saveCart(cart);
     let button = this.getSingleButton(id);
     button.disabled = false;
-    button.innerHTML = `Dodaj`;
+    button.innerHTML = "Dodaj";
   }
   getSingleButton(id){
       return buttonsDOM.find(button => button.dataset.id == id);
