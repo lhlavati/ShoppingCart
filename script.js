@@ -75,7 +75,6 @@ class UI {
       tempTotal += item.amount * item.count;
     });
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2)) + " kn";
-    console.log(cartTotal);
   }
   addCartItem(item) {
     const div = document.createElement("div");
@@ -92,7 +91,31 @@ class UI {
                         <i class="material-icons arrow_down" data-id=${item.id}>arrow_drop_down</i>
                     </div>`;
     cartContent.appendChild(div);
-    console.log(cartContent);
+  }
+  cartLogic(){
+      clearCartBtn.addEventListener("click", () => {
+          this.clearCart();
+      });
+  }
+  clearCart(){
+      let cartItems = cart.map(item => item.id);
+      cartItems.forEach(id => this.removeItem(id));
+      console.log(cartContent.children);
+      
+      while(cartContent.children.length > 0){
+          cartContent.removeChild(cartContent.children[0]);
+      }
+  }
+  removeItem(id){
+    cart = cart.filter(item => item.id !== id);
+    this.setCartValues(cart);
+    Storage.saveCart(cart);
+    let button = this.getSingleButton(id);
+    button.disabled = false;
+    button.innerHTML = `Dodaj`;
+  }
+  getSingleButton(id){
+      return buttonsDOM.find(button => button.dataset.id == id);
   }
 }
 
@@ -118,5 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(() => {
       ui.getButtons();
+      ui.cartLogic();
     });
 });
