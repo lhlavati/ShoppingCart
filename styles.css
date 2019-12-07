@@ -6,6 +6,17 @@ body {
   font-family: "Lato", sans-serif;
   color: whitesmoke;
 }
+
+.nav-wrapper{
+  background-color: lightslategray;
+  width: 1236.25px;
+}
+
+.shopping_cart{
+  padding: 0px 10px;
+  cursor: pointer;
+}
+
 .product-count {
   padding-right: 24px;
 }
