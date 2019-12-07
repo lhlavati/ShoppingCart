@@ -30,24 +30,6 @@ class Products {
 }
 
 class UI {
-  // displayProducts(products){
-  //     let result = "";
-  //     products.forEach(product => {
-  //         result += `
-  //         <article class="product">
-  //             <div class="img-containter">
-  //                 <img src=${product.image}
-  //                     alt="product" class="product-img">
-  //             </div>
-  //             <h3>${product.name}</h3>
-  //             <h4>${product.amount} ${product.currency}/${product.measureUnit}</h4>
-  //             <a class="waves-effect waves-light red btn" id="dodaj" data-id=${product.id}><i
-  //                     class="material-icons left">add_circle</i>Dodaj</a>
-  //         </article>
-  //         `;
-  //     });
-  //     productsDOM.innerHTML = result;
-  // }
   getButtons() {
     const buttons = [...document.querySelectorAll(".add-btn")];
     buttonsDOM = buttons;
